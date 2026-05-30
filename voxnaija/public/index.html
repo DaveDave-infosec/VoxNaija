@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoxNaija — Free Text-to-Speech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">VoxNaija</div>
+        <p class="tagline">Free text-to-speech with Nigerian, American &amp; British voices</p>
+    </header>
+
+    <main>
+        <div class="card">
+            <div class="field">
+                <label for="voice">Voice</label>
+                <select id="voice">
+                    <optgroup label="Nigerian">
+                        <option value="ng-female">Ezinne (Female)</option>
+                        <option value="ng-male">Abeo (Male)</option>
+                    </optgroup>
+                    <optgroup label="American">
+                        <option value="us-female">Jenny (Female)</option>
+                        <option value="us-male">Guy (Male)</option>
+                    </optgroup>
+                    <optgroup label="British">
+                        <option value="gb-female">Sonia (Female)</option>
+                        <option value="gb-male">Ryan (Male)</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div class="sliders">
+                <div class="field">
+                    <label for="rate">
+                        <span>Speed</span>
+                        <span class="value" id="rate-value">+0%</span>
+                    </label>
+                    <input type="range" id="rate" min="-50" max="50" value="0" step="5">
+                </div>
+                <div class="field">
+                    <label for="pitch">
+                        <span>Pitch</span>
+                        <span class="value" id="pitch-value">+0 Hz</span>
+                    </label>
+                    <input type="range" id="pitch" min="-50" max="50" value="0" step="5">
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="text">Text</label>
+                <textarea id="text" placeholder="Type or paste the text you want to convert to speech..." maxlength="5000"></textarea>
+                <div class="counter"><span id="count">0</span> / 5000</div>
+            </div>
+
+            <button id="generate">
+                <span class="btn-label">Generate</span>
+                <span class="spinner hidden"></span>
+            </button>
+
+            <div id="output" class="hidden">
+                <audio id="player" controls></audio>
+                <a id="download" download="voxnaija.mp3">Download MP3</a>
+            </div>
+
+            <div id="error" class="error hidden"></div>
+        </div>
+
+        <div id="history-section" class="history-section hidden">
+            <div class="history-header">
+                <h2>Recent generations</h2>
+                <button id="clear-history" class="text-btn">Clear all</button>
+            </div>
+            <div id="history-list" class="history-list"></div>
+        </div>
+    </main>
+
+    <div id="modal-backdrop" class="modal-backdrop hidden">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <h3 class="modal-title" id="modal-title">Are you sure?</h3>
+            <p class="modal-body" id="modal-body">This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button id="modal-cancel" class="btn-secondary">Cancel</button>
+                <button id="modal-confirm" class="btn-danger">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Powered by edge-tts. Free forever.
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>
