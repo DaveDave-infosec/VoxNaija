@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 import edge_tts
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import Response
+from fastapi.responses import Response, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
@@ -33,6 +33,11 @@ class TTSRequest(BaseModel):
     voice: str
     rate: int = Field(default=0, ge=-50, le=50)
     pitch: int = Field(default=0, ge=-50, le=50)
+
+
+@app.get("/", include_in_schema=False)
+async def serve_root():
+    return RedirectResponse("/index.html", status_code=307)
 
 
 @app.post("/api/generate")
